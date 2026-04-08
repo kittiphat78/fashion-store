@@ -300,3 +300,84 @@ export const stats = [
   { label: th.stats.products, value: '1,000+' },
   { label: th.stats.years, value: '8+' },
 ];
+
+// ========== ประเภทคำสั่งซื้อ (Admin) ==========
+export type OrderStatus = 'pending' | 'shipping' | 'completed';
+
+export interface Order {
+  id: string;
+  customerName: string;
+  customerEmail: string;
+  items: { name: string; quantity: number; price: number }[];
+  total: number;
+  status: OrderStatus;
+  date: string;
+}
+
+// ========== Mock Orders (Admin) ==========
+export const mockOrders: Order[] = [
+  {
+    id: 'ORD-001',
+    customerName: 'สมหญิง ศรีสุข',
+    customerEmail: 'somying@email.com',
+    items: [
+      { name: 'เสื้อยืดคอตตอนพรีเมียม', quantity: 2, price: 599 },
+      { name: 'กางเกงขาสั้นแคชชวล', quantity: 1, price: 449 },
+    ],
+    total: 1647,
+    status: 'completed',
+    date: '2026-04-08',
+  },
+  {
+    id: 'ORD-002',
+    customerName: 'ธนกร วงศ์ประเสริฐ',
+    customerEmail: 'thanakorn@email.com',
+    items: [
+      { name: 'รองเท้าผ้าใบสีขาวคลาสสิก', quantity: 1, price: 1499 },
+    ],
+    total: 1499,
+    status: 'shipping',
+    date: '2026-04-07',
+  },
+  {
+    id: 'ORD-003',
+    customerName: 'พิมพ์ชนก แก้วมณี',
+    customerEmail: 'pimchanok@email.com',
+    items: [
+      { name: 'แจ็คเก็ตยีนส์แคชชวล', quantity: 1, price: 1299 },
+      { name: 'เสื้อเชิ้ตทางการสุดเรียบหรู', quantity: 2, price: 899 },
+    ],
+    total: 3097,
+    status: 'pending',
+    date: '2026-04-08',
+  },
+  {
+    id: 'ORD-004',
+    customerName: 'อนุชา จันทร์เจริญ',
+    customerEmail: 'anucha@email.com',
+    items: [
+      { name: 'รองเท้าวิ่งสวมใส่สบาย', quantity: 1, price: 1999 },
+    ],
+    total: 1999,
+    status: 'completed',
+    date: '2026-04-06',
+  },
+  {
+    id: 'ORD-005',
+    customerName: 'วรรณา สุขสมบูรณ์',
+    customerEmail: 'wanna@email.com',
+    items: [
+      { name: 'เสื้อยืดคอตตอนพรีเมียม', quantity: 3, price: 599 },
+    ],
+    total: 1797,
+    status: 'shipping',
+    date: '2026-04-07',
+  },
+];
+
+// ========== Admin Navigation ==========
+export const adminNavItems: NavItem[] = [
+  { label: th.admin.sidebar.dashboard, href: '/admin' },
+  { label: th.admin.sidebar.products, href: '/admin/products' },
+  { label: th.admin.sidebar.orders, href: '/admin/orders' },
+];

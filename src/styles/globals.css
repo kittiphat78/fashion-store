@@ -1306,6 +1306,22 @@ img {
   color: var(--color-white);
 }
 
+.header-admin-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-gray-600);
+  padding: 6px 14px;
+  border: 1.5px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.header-admin-link:hover {
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  border-color: var(--color-gray-900);
+}
+
 /* Mobile header extras */
 .header-mobile-divider {
   height: 1px;
@@ -1597,4 +1613,479 @@ img {
 .product-card-buttons {
   display: flex;
   gap: var(--space-2);
+}
+
+/* ==========================================================
+   ADMIN PANEL — แยก layout จากฝั่ง user อย่างชัดเจน
+   ========================================================== */
+
+/* Admin Loading / Unauthorized */
+.adm-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: var(--space-4);
+  color: var(--color-gray-500);
+  font-size: 1.1rem;
+}
+
+/* Admin Layout — Sidebar + Main */
+.adm-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+@media (max-width: 900px) {
+  .adm-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Sidebar ===== */
+.adm-sidebar {
+  background: var(--color-gray-900);
+  color: var(--color-white);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+@media (max-width: 900px) {
+  .adm-sidebar {
+    position: static;
+    height: auto;
+    padding: var(--space-4) var(--space-6);
+  }
+}
+
+.adm-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+.adm-sidebar-logo {
+  width: 40px;
+  height: 40px;
+  background: var(--color-white);
+  color: var(--color-black);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.875rem;
+}
+.adm-sidebar-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.adm-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  flex: 1;
+}
+.adm-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-gray-400);
+  transition: all var(--transition-fast);
+}
+.adm-sidebar-link:hover {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.06);
+}
+.adm-sidebar-link.active {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+}
+.adm-sidebar-icon {
+  font-size: 1.1rem;
+  width: 24px;
+  text-align: center;
+}
+
+.adm-sidebar-footer {
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: var(--space-6);
+}
+.adm-sidebar-back {
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: var(--color-gray-500);
+  transition: color var(--transition-fast);
+}
+.adm-sidebar-back:hover {
+  color: var(--color-white);
+}
+
+/* ===== Admin Main ===== */
+.adm-main {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-gray-50);
+  min-height: 100vh;
+}
+
+/* ===== Admin Header ===== */
+.adm-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-8);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.adm-header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+.adm-header-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.adm-header-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-gray-600);
+}
+.adm-header-logout {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-gray-500);
+  background: none;
+  border: 1.5px solid var(--color-gray-200);
+  padding: 6px 14px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.adm-header-logout:hover {
+  color: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* ===== Admin Content ===== */
+.adm-content {
+  padding: var(--space-8);
+  flex: 1;
+}
+@media (max-width: 640px) {
+  .adm-content {
+    padding: var(--space-4);
+  }
+}
+
+.adm-subtitle {
+  font-size: 0.95rem;
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-6);
+}
+
+/* ===== Dashboard Cards ===== */
+.adm-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+}
+@media (max-width: 1100px) {
+  .adm-cards-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .adm-cards-grid { grid-template-columns: 1fr; }
+}
+
+.adm-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  transition: box-shadow var(--transition-base);
+}
+.adm-card:hover {
+  box-shadow: var(--shadow-md);
+}
+.adm-card-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+.adm-card-body {
+  min-width: 0;
+}
+.adm-card-label {
+  font-size: 0.813rem;
+  color: var(--color-gray-500);
+  font-weight: 500;
+  margin-bottom: var(--space-1);
+}
+.adm-card-value {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--color-black);
+  margin-bottom: var(--space-1);
+}
+.adm-card-trend {
+  font-size: 0.75rem;
+  color: var(--color-success);
+  font-weight: 500;
+}
+
+/* ===== Admin Section ===== */
+.adm-section {
+  margin-top: var(--space-8);
+}
+.adm-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.adm-section-header h2 {
+  font-size: 1.25rem;
+}
+.adm-section-link {
+  font-size: 0.813rem;
+  font-weight: 600;
+  color: var(--color-gray-500);
+  transition: color var(--transition-fast);
+}
+.adm-section-link:hover {
+  color: var(--color-black);
+}
+
+/* ===== Admin Tables ===== */
+.adm-table-wrap {
+  overflow-x: auto;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+}
+.adm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.adm-table th {
+  text-align: left;
+  padding: var(--space-4) var(--space-5);
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--color-gray-500);
+  border-bottom: 1px solid var(--color-gray-200);
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+}
+.adm-table td {
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-gray-100);
+  color: var(--color-gray-700);
+  vertical-align: middle;
+}
+.adm-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.adm-table tbody tr:hover {
+  background: var(--color-gray-50);
+}
+.adm-table-name {
+  font-weight: 600;
+  color: var(--color-black);
+}
+.adm-table-sub {
+  font-size: 0.75rem;
+  color: var(--color-gray-400);
+  margin-top: 2px;
+}
+.adm-table-img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-gray-50);
+}
+.adm-table-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.adm-table-actions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.adm-empty {
+  text-align: center;
+  padding: var(--space-12);
+  color: var(--color-gray-400);
+  font-size: 1rem;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-200);
+}
+
+/* ===== Status Badges ===== */
+.adm-status {
+  display: inline-flex;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.adm-status-pending {
+  background: rgba(234, 179, 8, 0.1);
+  color: #B45309;
+}
+.adm-status-shipping {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563EB;
+}
+.adm-status-completed {
+  background: rgba(5, 150, 105, 0.08);
+  color: var(--color-success);
+}
+
+.adm-status-select {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  padding: 6px 10px;
+  border: 1.5px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  cursor: pointer;
+  color: var(--color-gray-700);
+}
+
+.adm-status-summary {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+.adm-status-chip {
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-size: 0.813rem;
+  font-weight: 600;
+}
+
+/* ===== Admin Buttons ===== */
+.adm-btn-primary {
+  font-family: var(--font-sans);
+  font-size: 0.813rem;
+  font-weight: 600;
+  background: var(--color-black);
+  color: var(--color-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.adm-btn-primary:hover {
+  background: var(--color-gray-800);
+}
+.adm-btn-secondary {
+  font-family: var(--font-sans);
+  font-size: 0.813rem;
+  font-weight: 600;
+  background: var(--color-gray-100);
+  color: var(--color-black);
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.adm-btn-secondary:hover {
+  background: var(--color-gray-200);
+}
+.adm-btn-edit {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-gray-600);
+  background: var(--color-gray-100);
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.adm-btn-edit:hover {
+  background: var(--color-gray-200);
+}
+.adm-btn-delete {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-error);
+  background: rgba(220, 38, 38, 0.06);
+  border: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.adm-btn-delete:hover {
+  background: rgba(220, 38, 38, 0.12);
+}
+
+/* ===== Admin Form Card ===== */
+.adm-form-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  margin-bottom: var(--space-6);
+  animation: fadeInUp 0.3s var(--ease-out);
+}
+.adm-form-card h3 {
+  margin-bottom: var(--space-5);
+}
+.adm-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.adm-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+@media (max-width: 640px) {
+  .adm-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.adm-form-actions {
+  display: flex;
+  gap: var(--space-3);
 }

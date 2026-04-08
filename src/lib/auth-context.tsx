@@ -1,6 +1,7 @@
 /**
  * Auth Context (Mock Authentication)
  * จัดการ session ผู้ใช้งาน — เก็บข้อมูลลง localStorage
+ * รองรับ role: 'user' | 'admin'
  * พร้อมต่อยอดเป็น Supabase / Firebase Auth ได้
  */
 
@@ -16,15 +17,19 @@ import {
 } from 'react';
 
 // ========== Types ==========
+export type UserRole = 'user' | 'admin';
+
 export interface User {
   id: string;
   name: string;
   email: string;
+  role: UserRole;
 }
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
+  isAdmin: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   register: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => void;
@@ -64,9 +69,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [user]);
 
+  /* ตรวจสอบว่าเป็น admin หรือไม่ */
+  const isAdmin = user?.role === 'admin';
+
   /* เข้าสู่ระบบ (Mock) */
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
-    // จำลองการเรียก API (delay 500ms)
     await new Promise((r) => setTimeout(r, 500));
 
     try {
@@ -85,12 +92,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return true;
       }
 
-      // อนุญาต demo login (ถ้ายังไม่มีข้อมูล)
+      // Demo admin account
+      if (email === 'admin@fashionco.com' && password === 'admin123') {
+        const adminUser: User = {
+          id: 'admin-001',
+          name: 'ผู้ดูแลระบบ',
+          email: 'admin@fashionco.com',
+          role: 'admin',
+        };
+        setUser(adminUser);
+        return true;
+      }
+
+      // Demo user account
       if (email === 'demo@fashionco.com' && password === '123456') {
         const demoUser: User = {
           id: 'demo-001',
           name: 'ผู้ใช้ทดสอบ',
           email: 'demo@fashionco.com',
+          role: 'user',
         };
         setUser(demoUser);
         return true;
@@ -102,7 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  /* สมัครสมาชิก (Mock) */
+  /* สมัครสมาชิก (Mock) — ผู้ใช้ทั่วไปเสมอ */
   const register = useCallback(
     async (name: string, email: string, password: string): Promise<boolean> => {
       await new Promise((r) => setTimeout(r, 500));
@@ -113,7 +133,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           ? JSON.parse(usersRaw)
           : [];
 
-        // เช็คอีเมลซ้ำ
         if (users.some((u) => u.email === email)) {
           return false;
         }
@@ -123,12 +142,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           name,
           email,
           password,
+          role: 'user' as UserRole,
         };
 
         users.push(newUser);
         localStorage.setItem(USERS_KEY, JSON.stringify(users));
 
-        // ล็อกอินทันทีหลังสมัคร
         const { password: _, ...userData } = newUser;
         setUser(userData);
         return true;
@@ -145,7 +164,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, isAdmin, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -14,7 +14,7 @@ import { useCart } from '@/lib/cart-context';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, isAdmin, logout } = useAuth();
   const { totalItems } = useCart();
 
   return (
@@ -62,6 +62,11 @@ export default function Header() {
           {/* สถานะล็อกอิน */}
           {user ? (
             <div className="header-user">
+              {isAdmin && (
+                <Link href="/admin" className="header-admin-link">
+                  ⚙️ {th.admin.title}
+                </Link>
+              )}
               <span className="header-greeting">
                 {th.auth.greeting}, {user.name}
               </span>
@@ -133,6 +138,17 @@ export default function Header() {
             <li className="header-mobile-greeting">
               {th.auth.greeting}, {user.name}
             </li>
+            {isAdmin && (
+              <li>
+                <Link
+                  href="/admin"
+                  className="header-mobile-link"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  ⚙️ {th.admin.title}
+                </Link>
+              </li>
+            )}
             <li>
               <button
                 className="header-mobile-link header-mobile-logout"

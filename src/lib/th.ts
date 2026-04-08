@@ -197,6 +197,60 @@ const th = {
     loginRequired: 'กรุณาเข้าสู่ระบบก่อนดูตะกร้าสินค้า',
     loginToContinue: 'เข้าสู่ระบบเพื่อดำเนินการต่อ',
   },
+
+  // ========== ระบบ Admin (หลังบ้าน) ==========
+  admin: {
+    title: 'แผงควบคุม',
+    subtitle: 'ภาพรวมการดำเนินงานของร้าน',
+    backToSite: '← กลับหน้าร้าน',
+    sidebar: {
+      dashboard: 'แดชบอร์ด',
+      products: 'จัดการสินค้า',
+      orders: 'คำสั่งซื้อ',
+    },
+    dashboard: {
+      totalRevenue: 'รายได้ทั้งหมด',
+      totalOrders: 'คำสั่งซื้อทั้งหมด',
+      totalProducts: 'สินค้าทั้งหมด',
+      totalCustomers: 'ลูกค้าทั้งหมด',
+      recentOrders: 'คำสั่งซื้อล่าสุด',
+      viewAll: 'ดูทั้งหมด',
+    },
+    products: {
+      title: 'จัดการสินค้า',
+      addProduct: 'เพิ่มสินค้า',
+      editProduct: 'แก้ไขสินค้า',
+      deleteProduct: 'ลบสินค้า',
+      deleteConfirm: 'ยืนยันการลบสินค้านี้?',
+      name: 'ชื่อสินค้า',
+      price: 'ราคา',
+      originalPrice: 'ราคาเดิม',
+      category: 'หมวดหมู่',
+      image: 'รูปภาพ',
+      discount: 'ส่วนลด (%)',
+      save: 'บันทึก',
+      cancel: 'ยกเลิก',
+      noProducts: 'ยังไม่มีสินค้า',
+    },
+    orders: {
+      title: 'จัดการคำสั่งซื้อ',
+      orderId: 'เลขที่',
+      customer: 'ลูกค้า',
+      items: 'สินค้า',
+      total: 'ยอดรวม',
+      status: 'สถานะ',
+      date: 'วันที่',
+      actions: 'จัดการ',
+      noOrders: 'ยังไม่มีคำสั่งซื้อ',
+    },
+    status: {
+      pending: 'รอดำเนินการ',
+      shipping: 'กำลังจัดส่ง',
+      completed: 'สำเร็จ',
+    },
+    unauthorized: 'ไม่มีสิทธิ์เข้าถึง',
+    unauthorizedDesc: 'เฉพาะผู้ดูแลระบบเท่านั้น',
+  },
 } as const;
 
 export default th;
