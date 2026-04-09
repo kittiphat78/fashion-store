@@ -97,7 +97,7 @@ export default function CartPage() {
                 <span>฿{totalPrice.toLocaleString()}</span>
               </div>
 
-              <Button variant="primary" size="lg" fullWidth>
+              <Button variant="primary" size="lg" fullWidth href="/checkout">
                 {th.cart.checkout}
               </Button>
 

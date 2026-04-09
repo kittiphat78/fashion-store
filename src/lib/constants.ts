@@ -301,23 +301,40 @@ export const stats = [
   { label: th.stats.years, value: '8+' },
 ];
 
-// ========== ประเภทคำสั่งซื้อ (Admin) ==========
-export type OrderStatus = 'pending' | 'shipping' | 'completed';
+// ========== ประเภทคำสั่งซื้อ (Order System) ==========
+export type OrderStatus = 'waiting_payment' | 'paid' | 'shipping' | 'completed';
+
+export interface OrderItem {
+  name: string;
+  quantity: number;
+  price: number;
+  image?: string;
+}
 
 export interface Order {
   id: string;
+  userId: string;
   customerName: string;
   customerEmail: string;
-  items: { name: string; quantity: number; price: number }[];
+  items: OrderItem[];
   total: number;
   status: OrderStatus;
   date: string;
+  address: string;
+  phone: string;
+  paymentMethod: 'promptpay';
+  slipImage?: string; // base64 สำหรับ localStorage, URL สำหรับ Supabase
 }
+
+// ========== PromptPay Config ==========
+export const PROMPTPAY_NUMBER = '083-123-4567';
+export const PROMPTPAY_NAME = 'Fashion Co.';
 
 // ========== Mock Orders (Admin) ==========
 export const mockOrders: Order[] = [
   {
     id: 'ORD-001',
+    userId: 'demo-001',
     customerName: 'สมหญิง ศรีสุข',
     customerEmail: 'somying@email.com',
     items: [
@@ -327,9 +344,14 @@ export const mockOrders: Order[] = [
     total: 1647,
     status: 'completed',
     date: '2026-04-08',
+    address: '123/45 ถ.สุขุมวิท แขวงคลองเตย เขตคลองเตย กรุงเทพฯ 10110',
+    phone: '0812345678',
+    paymentMethod: 'promptpay',
+    slipImage: undefined,
   },
   {
     id: 'ORD-002',
+    userId: 'user-002',
     customerName: 'ธนกร วงศ์ประเสริฐ',
     customerEmail: 'thanakorn@email.com',
     items: [
@@ -338,9 +360,14 @@ export const mockOrders: Order[] = [
     total: 1499,
     status: 'shipping',
     date: '2026-04-07',
+    address: '789 ถ.พหลโยธิน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900',
+    phone: '0898765432',
+    paymentMethod: 'promptpay',
+    slipImage: undefined,
   },
   {
     id: 'ORD-003',
+    userId: 'user-003',
     customerName: 'พิมพ์ชนก แก้วมณี',
     customerEmail: 'pimchanok@email.com',
     items: [
@@ -348,11 +375,16 @@ export const mockOrders: Order[] = [
       { name: 'เสื้อเชิ้ตทางการสุดเรียบหรู', quantity: 2, price: 899 },
     ],
     total: 3097,
-    status: 'pending',
+    status: 'waiting_payment',
     date: '2026-04-08',
+    address: '456 ถ.รัชดา แขวงห้วยขวาง เขตห้วยขวาง กรุงเทพฯ 10310',
+    phone: '0654321098',
+    paymentMethod: 'promptpay',
+    slipImage: undefined,
   },
   {
     id: 'ORD-004',
+    userId: 'user-004',
     customerName: 'อนุชา จันทร์เจริญ',
     customerEmail: 'anucha@email.com',
     items: [
@@ -361,17 +393,26 @@ export const mockOrders: Order[] = [
     total: 1999,
     status: 'completed',
     date: '2026-04-06',
+    address: '321 ถ.เพชรบุรี แขวงราชเทวี เขตราชเทวี กรุงเทพฯ 10400',
+    phone: '0876543210',
+    paymentMethod: 'promptpay',
+    slipImage: undefined,
   },
   {
     id: 'ORD-005',
+    userId: 'user-005',
     customerName: 'วรรณา สุขสมบูรณ์',
     customerEmail: 'wanna@email.com',
     items: [
       { name: 'เสื้อยืดคอตตอนพรีเมียม', quantity: 3, price: 599 },
     ],
     total: 1797,
-    status: 'shipping',
+    status: 'paid',
     date: '2026-04-07',
+    address: '567 ถ.สีลม แขวงสีลม เขตบางรัก กรุงเทพฯ 10500',
+    phone: '0923456789',
+    paymentMethod: 'promptpay',
+    slipImage: undefined,
   },
 ];
 
@@ -381,3 +422,4 @@ export const adminNavItems: NavItem[] = [
   { label: th.admin.sidebar.products, href: '/admin/products' },
   { label: th.admin.sidebar.orders, href: '/admin/orders' },
 ];
+

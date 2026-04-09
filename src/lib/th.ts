@@ -198,6 +198,60 @@ const th = {
     loginToContinue: 'เข้าสู่ระบบเพื่อดำเนินการต่อ',
   },
 
+  // ========== Checkout (ชำระเงิน) ==========
+  checkout: {
+    title: 'ชำระเงิน',
+    subtitle: 'กรอกข้อมูลจัดส่งและเลือกวิธีชำระเงิน',
+    shippingInfo: 'ข้อมูลจัดส่ง',
+    recipientName: 'ชื่อผู้รับ',
+    recipientNamePlaceholder: 'กรอกชื่อ-นามสกุลผู้รับ',
+    address: 'ที่อยู่จัดส่ง',
+    addressPlaceholder: 'บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์',
+    phone: 'เบอร์โทรศัพท์',
+    phonePlaceholder: '08X-XXX-XXXX',
+    paymentMethod: 'วิธีชำระเงิน',
+    orderSummary: 'สรุปรายการ',
+    placeOrder: 'ยืนยันการสั่งซื้อ',
+    processing: 'กำลังดำเนินการ...',
+    errors: {
+      nameRequired: 'กรุณากรอกชื่อผู้รับ',
+      addressRequired: 'กรุณากรอกที่อยู่จัดส่ง',
+      phoneRequired: 'กรุณากรอกเบอร์โทรศัพท์',
+      phoneInvalid: 'เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลัก',
+      cartEmpty: 'ไม่มีสินค้าในตะกร้า',
+      loginRequired: 'กรุณาเข้าสู่ระบบก่อนสั่งซื้อ',
+    },
+  },
+
+  // ========== Payment (การชำระเงิน) ==========
+  payment: {
+    promptpay: 'PromptPay (พร้อมเพย์)',
+    promptpayDesc: 'สแกน QR Code หรือโอนเงินผ่านพร้อมเพย์',
+    bankTransfer: 'โอนเงินผ่านธนาคาร',
+    qrTitle: 'สแกน QR Code เพื่อชำระเงิน',
+    promptpayNumber: 'หมายเลขพร้อมเพย์',
+    amountToPay: 'ยอดเงินที่ต้องชำระ',
+    uploadSlip: 'แนบสลิปการโอนเงิน',
+    uploadSlipDesc: 'อัปโหลดรูปสลิปเพื่อยืนยันการชำระเงิน',
+    chooseFile: 'เลือกไฟล์',
+    slipUploaded: 'อัปโหลดสลิปเรียบร้อย ✓',
+    removeSlip: 'ลบสลิป',
+    slipPreview: 'ตัวอย่างสลิป',
+  },
+
+  // ========== Order Success (สั่งซื้อสำเร็จ) ==========
+  orderSuccess: {
+    title: 'สั่งซื้อเรียบร้อยแล้ว!',
+    subtitle: 'ขอบคุณที่สั่งซื้อสินค้ากับเรา',
+    orderId: 'เลขที่คำสั่งซื้อ',
+    paymentReminder: 'กรุณาชำระเงินตามยอดด้านล่าง แล้วแนบสลิปเพื่อยืนยัน',
+    paidAlready: 'แนบสลิปเรียบร้อยแล้ว — รอตรวจสอบจากทีมงาน',
+    backToHome: 'กลับหน้าหลัก',
+    continueShopping: 'เลือกซื้อสินค้าต่อ',
+    noOrder: 'ไม่พบคำสั่งซื้อ',
+    noOrderDesc: 'กรุณาทำการสั่งซื้อใหม่อีกครั้ง',
+  },
+
   // ========== ระบบ Admin (หลังบ้าน) ==========
   admin: {
     title: 'แผงควบคุม',
@@ -241,10 +295,17 @@ const th = {
       status: 'สถานะ',
       date: 'วันที่',
       actions: 'จัดการ',
+      address: 'ที่อยู่',
+      phone: 'เบอร์โทร',
+      slip: 'สลิป',
+      viewSlip: 'ดูสลิป',
+      noSlip: 'ยังไม่แนบสลิป',
       noOrders: 'ยังไม่มีคำสั่งซื้อ',
+      paymentMethod: 'ช่องทาง',
     },
     status: {
-      pending: 'รอดำเนินการ',
+      waiting_payment: 'รอชำระเงิน',
+      paid: 'ชำระเงินแล้ว',
       shipping: 'กำลังจัดส่ง',
       completed: 'สำเร็จ',
     },

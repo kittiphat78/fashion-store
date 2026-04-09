@@ -1,35 +1,21 @@
 /**
  * Admin Orders Page
- * จัดการคำสั่งซื้อ — ดูรายการ + เปลี่ยนสถานะ
+ * จัดการคำสั่งซื้อ — ดูรายการ + เปลี่ยนสถานะ + ดูสลิป
+ * ใช้ข้อมูลจาก OrderContext
  */
 
 'use client';
 
-import { useState, useCallback } from 'react';
 import OrderTable from '@/components/admin/OrderTable';
-import {
-  mockOrders,
-  type Order,
-  type OrderStatus,
-} from '@/lib/constants';
+import th from '@/lib/th';
+import { useOrder } from '@/lib/order-context';
 
 export default function AdminOrdersPage() {
-  const [orders, setOrders] = useState<Order[]>(mockOrders);
-
-  /* เปลี่ยนสถานะคำสั่งซื้อ */
-  const handleStatusChange = useCallback(
-    (orderId: string, newStatus: OrderStatus) => {
-      setOrders((prev) =>
-        prev.map((o) =>
-          o.id === orderId ? { ...o, status: newStatus } : o
-        )
-      );
-    },
-    []
-  );
+  const { orders, updateOrderStatus } = useOrder();
 
   /* สรุปจำนวนตามสถานะ */
-  const pending = orders.filter((o) => o.status === 'pending').length;
+  const waiting = orders.filter((o) => o.status === 'waiting_payment').length;
+  const paid = orders.filter((o) => o.status === 'paid').length;
   const shipping = orders.filter((o) => o.status === 'shipping').length;
   const completed = orders.filter((o) => o.status === 'completed').length;
 
@@ -37,19 +23,22 @@ export default function AdminOrdersPage() {
     <>
       {/* สรุปสถานะ */}
       <div className="adm-status-summary">
-        <div className="adm-status-chip adm-status-pending">
-          รอดำเนินการ: {pending}
+        <div className="adm-status-chip adm-status-waiting_payment">
+          {th.admin.status.waiting_payment}: {waiting}
+        </div>
+        <div className="adm-status-chip adm-status-paid">
+          {th.admin.status.paid}: {paid}
         </div>
         <div className="adm-status-chip adm-status-shipping">
-          กำลังจัดส่ง: {shipping}
+          {th.admin.status.shipping}: {shipping}
         </div>
         <div className="adm-status-chip adm-status-completed">
-          สำเร็จ: {completed}
+          {th.admin.status.completed}: {completed}
         </div>
       </div>
 
       {/* ตารางคำสั่งซื้อ */}
-      <OrderTable orders={orders} onStatusChange={handleStatusChange} />
+      <OrderTable orders={orders} onStatusChange={updateOrderStatus} />
     </>
   );
 }

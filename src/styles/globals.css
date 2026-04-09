@@ -2089,3 +2089,738 @@ img {
   display: flex;
   gap: var(--space-3);
 }
+
+/* ==========================================================
+   CHECKOUT PAGE — หน้า Checkout + Payment
+   ========================================================== */
+
+/* Checkout Layout: 2 คอลัมน์ */
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--space-10);
+  align-items: flex-start;
+}
+@media (max-width: 900px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.checkout-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.checkout-summary-section {
+  position: sticky;
+  top: calc(var(--header-height) + var(--space-6));
+}
+
+/* Checkout Step */
+.checkout-step {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  animation: fadeInUp 0.4s var(--ease-out);
+}
+
+.checkout-step-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.checkout-step-number {
+  width: 32px;
+  height: 32px;
+  background: var(--color-black);
+  color: var(--color-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.checkout-step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.checkout-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* Form validation error */
+.form-input-error {
+  border-color: var(--color-error) !important;
+}
+
+.form-field-error {
+  font-size: 0.813rem;
+  color: var(--color-error);
+  font-weight: 500;
+  margin-top: var(--space-1);
+  display: block;
+  animation: fadeIn 0.2s var(--ease-out);
+}
+
+/* Checkout Actions */
+.checkout-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.checkout-back-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-gray-500);
+  transition: color var(--transition-fast);
+}
+.checkout-back-link:hover {
+  color: var(--color-black);
+}
+
+/* ==========================================================
+   PAYMENT METHOD — เลือกวิธีชำระเงิน
+   ========================================================== */
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.payment-method-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border: 1.5px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+}
+.payment-method-card:hover {
+  border-color: var(--color-gray-400);
+}
+
+.payment-method-active {
+  border-color: var(--color-black);
+  background: var(--color-gray-50);
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.06);
+}
+
+.payment-method-radio {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.payment-method-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.payment-method-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.payment-method-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-black);
+  margin-bottom: 2px;
+}
+
+.payment-method-desc {
+  display: block;
+  font-size: 0.813rem;
+  color: var(--color-gray-500);
+}
+
+.payment-method-check {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-white);
+  background: var(--color-black);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: scaleIn 0.2s var(--ease-out);
+}
+
+/* ==========================================================
+   ORDER SUMMARY — สรุปรายการ (Sidebar)
+   ========================================================== */
+
+.order-summary {
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  animation: fadeInUp 0.5s var(--ease-out) 0.1s both;
+}
+
+.order-summary-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: var(--space-5);
+}
+
+.order-summary-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.order-summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+.order-summary-item-info {
+  display: flex;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.order-summary-item-name {
+  font-size: 0.875rem;
+  color: var(--color-gray-700);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.order-summary-item-qty {
+  font-size: 0.813rem;
+  color: var(--color-gray-400);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.order-summary-item-price {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-black);
+  flex-shrink: 0;
+}
+
+.order-summary-divider {
+  height: 1px;
+  background: var(--color-gray-200);
+  margin: var(--space-4) 0;
+}
+
+.order-summary-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  padding: var(--space-1) 0;
+}
+
+.order-summary-free {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.order-summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+/* ==========================================================
+   PROMPTPAY QR — แสดง QR + อัปโหลดสลิป
+   ========================================================== */
+
+.promptpay-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.promptpay-qr-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+}
+
+.promptpay-qr-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-5);
+}
+
+.promptpay-qr-image-wrap {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-4);
+  background: var(--color-white);
+  border: 2px dashed var(--color-gray-200);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-5);
+}
+
+.promptpay-qr-image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.promptpay-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.promptpay-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-2) 0;
+  font-size: 0.9rem;
+}
+
+.promptpay-info-label {
+  color: var(--color-gray-500);
+  font-weight: 500;
+}
+
+.promptpay-info-value {
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.promptpay-info-total {
+  padding-top: var(--space-3);
+  border-top: 1.5px solid var(--color-gray-200);
+  margin-top: var(--space-1);
+}
+
+.promptpay-amount {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-black);
+}
+
+/* Slip Upload */
+.slip-upload-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+}
+
+.slip-upload-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.slip-upload-desc {
+  font-size: 0.875rem;
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-5);
+}
+
+.slip-upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slip-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) var(--space-8);
+  border: 2px dashed var(--color-gray-300);
+  border-radius: var(--radius-md);
+  background: var(--color-gray-50);
+  color: var(--color-gray-700);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  width: 100%;
+  justify-content: center;
+}
+.slip-upload-btn:hover {
+  border-color: var(--color-black);
+  background: var(--color-white);
+}
+
+.slip-upload-icon {
+  font-size: 1.25rem;
+}
+
+.slip-uploading {
+  font-size: 0.75rem;
+  color: var(--color-gray-400);
+  font-weight: 400;
+}
+
+.slip-upload-input {
+  display: none;
+}
+
+/* Slip Preview */
+.slip-preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.slip-preview-image-wrap {
+  max-height: 300px;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-gray-200);
+}
+
+.slip-preview-image {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: contain;
+  display: block;
+}
+
+.slip-preview-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slip-uploaded-badge {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-success);
+  background: rgba(5, 150, 105, 0.08);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+.slip-remove-btn {
+  font-family: var(--font-sans);
+  font-size: 0.813rem;
+  font-weight: 500;
+  color: var(--color-error);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+}
+.slip-remove-btn:hover {
+  background: rgba(220, 38, 38, 0.06);
+}
+
+/* ==========================================================
+   ORDER SUCCESS PAGE — หน้าสั่งซื้อสำเร็จ
+   ========================================================== */
+
+.order-success-page {
+  max-width: 920px;
+  margin: 0 auto;
+  animation: fadeInUp 0.5s var(--ease-out);
+}
+
+.order-success-empty {
+  text-align: center;
+  padding: var(--space-16) 0;
+}
+.order-success-empty h2 {
+  margin-bottom: var(--space-3);
+}
+.order-success-empty p {
+  color: var(--color-gray-500);
+  margin-bottom: var(--space-8);
+}
+
+.order-success-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.order-success-check {
+  margin-bottom: var(--space-5);
+  animation: scaleIn 0.5s var(--ease-out);
+}
+
+.order-success-title {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  margin-bottom: var(--space-3);
+}
+
+.order-success-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-gray-500);
+}
+
+/* Order ID Card */
+.order-success-id-card {
+  background: var(--color-gray-50);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-8);
+  animation: fadeInUp 0.4s var(--ease-out) 0.1s both;
+}
+
+.order-success-id-label {
+  font-size: 0.9rem;
+  color: var(--color-gray-500);
+  font-weight: 500;
+}
+
+.order-success-id-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-black);
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  letter-spacing: 0.03em;
+}
+
+/* Content Grid */
+.order-success-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-10);
+}
+@media (max-width: 768px) {
+  .order-success-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.order-success-payment {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.order-success-reminder {
+  font-size: 0.95rem;
+  color: var(--color-gray-600);
+  font-weight: 500;
+  padding: var(--space-4);
+  background: rgba(234, 179, 8, 0.08);
+  border: 1px solid rgba(234, 179, 8, 0.2);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.order-success-paid-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: rgba(5, 150, 105, 0.08);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+  border-radius: var(--radius-md);
+  color: var(--color-success);
+  font-weight: 600;
+  justify-content: center;
+}
+.order-success-paid-badge span {
+  font-size: 1.25rem;
+}
+.order-success-paid-badge p {
+  color: var(--color-success);
+  font-size: 0.9rem;
+}
+
+/* Order Details */
+.order-success-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.order-success-detail-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.order-success-detail-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.order-success-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.order-success-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+} 
+
+.order-success-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-black);
+  padding-top: var(--space-4);
+  border-top: 1.5px solid var(--color-gray-200);
+  margin-top: var(--space-3);
+}
+
+.order-success-shipping {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  line-height: 1.6;
+}
+
+.order-success-shipping strong {
+  color: var(--color-gray-700);
+  font-weight: 600;
+}
+
+/* Actions */
+.order-success-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-gray-200);
+}
+
+.order-success-continue-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-gray-500);
+  transition: color var(--transition-fast);
+}
+.order-success-continue-link:hover {
+  color: var(--color-black);
+}
+
+/* ==========================================================
+   ADMIN — NEW STATUS COLORS + SLIP MODAL
+   ========================================================== */
+
+/* Status: รอชำระเงิน (สีส้ม) */
+.adm-status-waiting_payment {
+  background: rgba(234, 179, 8, 0.1);
+  color: #B45309;
+}
+
+/* Status: ชำระเงินแล้ว (สีเขียวอ่อน) */
+.adm-status-paid {
+  background: rgba(52, 211, 153, 0.12);
+  color: #047857;
+}
+
+/* Slip Modal Overlay */
+.adm-slip-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  animation: fadeIn 0.2s var(--ease-out);
+}
+
+.adm-slip-modal {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: scaleIn 0.3s var(--ease-out);
+}
+
+.adm-slip-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.adm-slip-modal-header h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.adm-slip-close {
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  background: none;
+  border: none;
+  color: var(--color-gray-500);
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  line-height: 1;
+}
+.adm-slip-close:hover {
+  color: var(--color-black);
+  background: var(--color-gray-100);
+}
+
+.adm-slip-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}

@@ -1,6 +1,7 @@
 /**
  * Admin Dashboard Page
  * แสดงการ์ดสรุปข้อมูลร้านค้า + คำสั่งซื้อล่าสุด
+ * ใช้ข้อมูลจาก OrderContext (localStorage) แทน mockOrders
  */
 
 'use client';
@@ -8,12 +9,17 @@
 import Link from 'next/link';
 import DashboardCard from '@/components/admin/DashboardCard';
 import th from '@/lib/th';
-import { products, mockOrders } from '@/lib/constants';
+import { products } from '@/lib/constants';
+import { useOrder } from '@/lib/order-context';
 
 export default function AdminDashboardPage() {
+  const { orders } = useOrder();
+
   /* คำนวณสถิติ */
-  const totalRevenue = mockOrders.reduce((sum, o) => sum + o.total, 0);
-  const pendingCount = mockOrders.filter((o) => o.status === 'pending').length;
+  const totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+  const waitingCount = orders.filter((o) => o.status === 'waiting_payment').length;
+  const paidCount = orders.filter((o) => o.status === 'paid').length;
+  const uniqueCustomers = new Set(orders.map((o) => o.customerEmail)).size;
 
   return (
     <>
@@ -31,8 +37,8 @@ export default function AdminDashboardPage() {
         <DashboardCard
           icon="📋"
           label={th.admin.dashboard.totalOrders}
-          value={String(mockOrders.length)}
-          trend={`${pendingCount} รอดำเนินการ`}
+          value={String(orders.length)}
+          trend={`${waitingCount} รอชำระ · ${paidCount} รอตรวจสอบ`}
         />
         <DashboardCard
           icon="📦"
@@ -42,7 +48,7 @@ export default function AdminDashboardPage() {
         <DashboardCard
           icon="👥"
           label={th.admin.dashboard.totalCustomers}
-          value="128"
+          value={String(uniqueCustomers)}
           trend="+8 สัปดาห์นี้"
         />
       </div>
@@ -67,7 +73,7 @@ export default function AdminDashboardPage() {
               </tr>
             </thead>
             <tbody>
-              {mockOrders.slice(0, 3).map((order) => (
+              {orders.slice(0, 5).map((order) => (
                 <tr key={order.id}>
                   <td className="adm-table-name">{order.id}</td>
                   <td>{order.customerName}</td>
@@ -81,6 +87,13 @@ export default function AdminDashboardPage() {
                   </td>
                 </tr>
               ))}
+              {orders.length === 0 && (
+                <tr>
+                  <td colSpan={4} style={{ textAlign: 'center', color: '#999', padding: '24px' }}>
+                    {th.admin.orders.noOrders}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>
